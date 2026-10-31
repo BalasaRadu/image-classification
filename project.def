@@ -1,0 +1,28 @@
+Bootstrap: docker
+From: pytorch/pytorch:2.4.0-cuda12.1-cudnn9-runtime
+
+%files
+    requirements.txt /opt/requirements.txt
+
+%post
+    apt-get update && apt-get install -y python3-pip && rm -rf /var/lib/apt/lists/*
+
+    pip install --upgrade pip
+
+    # Force override anything baked into the base image
+    pip install --upgrade --force-reinstall \
+        torch==2.4.0 \
+        torchvision==0.19.0
+
+    # Install remaining requirements
+    pip install -r /opt/requirements.txt
+
+    pip install notebook jupyterlab jupyter
+
+%environment
+    export PATH=/opt/conda/bin:$PATH
+    export PYTHONUNBUFFERED=1
+    export JUPYTER_TOKEN="root"
+
+%runscript
+    jupyter notebook --ip=0.0.0.0 --no-browser --allow-root --NotebookApp.token="$JUPYTER_TOKEN"

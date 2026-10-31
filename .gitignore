@@ -1,0 +1,47 @@
+# Secrets (none in this project today; kept as a safety net)
+.env
+.env.*
+*.pem
+*.key
+
+# Container image (9.4 GB, rebuild with `make build`)
+*.sif
+
+# Datasets: third-party data, including photos of real people and medical images
+data/
+
+# Images and documents built from dataset samples
+grid_augmentari_*.png
+*.pdf
+*.docx
+
+# Submission archives
+*.zip
+
+# Trained weights (177 MB)
+modele_salvate/
+*.pth
+*.pt
+
+# Generated experiment output
+runs/
+submisii/
+output_*.txt
+error_*.txt
+
+# Keep only the confusion matrices of the best models
+rezultate_grafice/*
+!rezultate_grafice/matrice_confuzie_resnet18_faces_freezeFalse_warmupFalse_20260524_211613.png
+!rezultate_grafice/matrice_confuzie_resnet18_moles_freezeFalse_warmupFalse_20260524_214427.png
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# Editor and OS
+.vscode/
+.idea/
+.DS_Store
